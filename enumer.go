@@ -34,6 +34,17 @@ func %[1]sListString() []string {
 }
 `
 
+const isValidmethod = `
+func %[1]sIsValid(t %[1]s) bool {
+	for _, v := range %[1]sList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
+}
+`
+
 func (g *Generator) buildValueToNameMap(runs [][]Value, typeName string, runsThreshold int) {
 	// At this moment, either "g.declareIndexAndNameVars()" or "g.declareNameVars()" has been called
 	g.Printf("\nvar _%sNameToValue_map = map[string]%s{\n", typeName, typeName)
@@ -56,6 +67,7 @@ func (g *Generator) buildValueToNameMap(runs [][]Value, typeName string, runsThr
 	g.Printf("}\n\n")
 	g.Printf(stringValueToNameMap, typeName)
 	g.Printf(listMethod, typeName)
+	g.Printf(isValidmethod, typeName)
 }
 
 // Arguments to format are:

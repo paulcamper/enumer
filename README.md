@@ -13,6 +13,7 @@ from a REST API request... In short, from those places where using the real enum
 be almost meaningless or hard to trace or use by a human.
 * A function `<Type>List() []<Type>` to get a list of the enums.
 * A function `<Type>ListString() []string` to get a list of the string representation of the enums.
+* A function `<Type>IsValid() bool` to check for valid a valid const, this can be used to check if a provided value is predefined.
 * When the flag `json` is provided, two additional methods will be generated, `MarshalJSON()` and `UnmarshalJSON()`. These make
 the enum conform to the `json.Marshaler` and `json.Unmarshaler` interfaces. Very useful to use it in JSON APIs.
 * When the flag `yaml` is provided, two additional methods will be generated, `MarshalYAML()` and `UnmarshalYAML()`. These make
