@@ -96,7 +96,15 @@ For example, the command `enumer -type=MyType -json -transform=snake` would gene
 ```go
 name := MyTypeValue.String() // name => "my_type_value"
 ```
-**Note**: The transformation only works form CamelCase to sanake_case or kebab-case, not the other way around.
+**Note**: The transformation only works form CamelCase to snake_case or kebab-case, not the other way around.
+
+### Transforms
+- CamelCase
+- snake_case
+- kebab-case
+- lower (Lowercase)
+- upper (Uppercase)
+- title (TitleCase)
 
 ## How to use
 The usage of Enumer is the same as Stringer, so you can refer to the [Stringer docs](https://godoc.org/golang.org/x/tools/cmd/stringer)
