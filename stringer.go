@@ -290,10 +290,14 @@ func (pkg *Package) check(fs *token.FileSet, astFiles []*ast.File) {
 func (g *Generator) transformValueNames(values []Value, transformMethod string) {
 	var transform func(string) string
 	switch transformMethod {
-	case "snake":
+	case "snake", "snake_case", "snake_lower":
 		transform = toSnakeCase
-	case "kebab":
+	case "snake_upper":
+		transform = toSnakeCaseUpper
+	case "kebab", "kebab-case", "kebab_lower":
 		transform = toKebabCase
+	case "kebab_upper":
+		transform = toKebabCaseUpper
 	case "lower":
 		transform = strings.ToLower
 	case "upper":

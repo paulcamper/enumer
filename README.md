@@ -99,10 +99,12 @@ name := MyTypeValue.String() // name => "my_type_value"
 ```
 **Note**: The transformation only works form CamelCase to snake_case or kebab-case, not the other way around.
 
-### Transforms
+### Transformers
 - CamelCase
 - snake_case
-- kebab-case
+- snake_lower
+- snake_upper
+- kebab-case (Value: kebab)
 - lower (Lowercase)
 - upper (Uppercase)
 - title (TitleCase)
