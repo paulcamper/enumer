@@ -304,6 +304,12 @@ func (g *Generator) transformValueNames(values []Value, transformMethod string) 
 		transform = strings.ToUpper
 	case "title":
 		transform = strings.ToTitle
+	case "first":
+		transform = first
+	case "first_upper":
+		transform = firstUpper
+	case "first_lower":
+		transform = firstLower
 	default:
 		return
 	}

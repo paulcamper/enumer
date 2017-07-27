@@ -108,6 +108,9 @@ name := MyTypeValue.String() // name => "my_type_value"
 - lower (Lowercase)
 - upper (Uppercase)
 - title (TitleCase)
+- first (Use first character of string)
+- first_lower (same as first only lower case)
+- first_upper (same as first only upper case)
 
 ## How to use
 The usage of Enumer is the same as Stringer, so you can refer to the [Stringer docs](https://godoc.org/golang.org/x/tools/cmd/stringer)

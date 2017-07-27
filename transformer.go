@@ -3,6 +3,8 @@ package main
 import (
 	"strings"
 
+	"unicode/utf8"
+
 	"github.com/fatih/camelcase"
 )
 
@@ -33,4 +35,17 @@ func toKebabCase(src string) string {
 
 func toKebabCaseUpper(src string) string {
 	return strings.ToUpper(toKebabCase(src))
+}
+
+func first(src string) string {
+	r, _ := utf8.DecodeRuneInString(src)
+	return string(r)
+}
+
+func firstUpper(src string) string {
+	return strings.ToUpper(first(src))
+}
+
+func firstLower(src string) string {
+	return strings.ToLower(first(src))
 }
