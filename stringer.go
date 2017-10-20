@@ -85,14 +85,15 @@ var (
 	output          = flag.String("output", "", "output file name; default srcdir/<type>_string.go")
 	transformMethod = flag.String("transform", "noop", "enum item name transformation method. Default: noop")
 	trimPrefix      = flag.String("trimprefix", "", "transform each item name by removing a prefix. Default: \"\"")
+	trimSuffix      = flag.String("trimsuffix", "", "transform each item name by removing a suffix. Default: \"\"")
 	autoTrimPrefix  = flag.Bool("autotrimprefix", false, "if true, remove a common prefix from each item name. Default: false")
 )
 
 // Usage is a replacement usage function for the flags package.
 func Usage() {
 	fmt.Fprintf(os.Stderr, "Usage of %s:\n", os.Args[0])
-	fmt.Fprintf(os.Stderr, "\tstringer [flags] -type T [directory]\n")
-	fmt.Fprintf(os.Stderr, "\tstringer [flags] -type T files... # Must be a single package\n")
+	fmt.Fprintf(os.Stderr, "\tenumer [flags] -type T [directory]\n")
+	fmt.Fprintf(os.Stderr, "\tenumer [flags] -type T files... # Must be a single package\n")
 	fmt.Fprintf(os.Stderr, "For more information, see:\n")
 	fmt.Fprintf(os.Stderr, "\thttp://godoc.org/golang.org/x/tools/cmd/stringer\n")
 	fmt.Fprintf(os.Stderr, "Flags:\n")
@@ -148,7 +149,7 @@ func main() {
 
 	// Run generate for each type.
 	for _, typeName := range types {
-		g.generate(typeName, *json, *yaml, *sql, *transformMethod, *trimPrefix, *autoTrimPrefix)
+		g.generate(typeName, *json, *yaml, *sql, *transformMethod, *trimPrefix, *autoTrimPrefix, *trimSuffix)
 	}
 
 	// Format the output.
@@ -316,7 +317,7 @@ func (g *Generator) transformValueNames(values []Value, transformMethod string) 
 }
 
 // generate produces the String method for the named type.
-func (g *Generator) generate(typeName string, includeJSON, includeYAML, includeSQL bool, transformMethod string, trimPrefix string, autoTrimPrefix bool) {
+func (g *Generator) generate(typeName string, includeJSON, includeYAML, includeSQL bool, transformMethod string, trimPrefix string, autoTrimPrefix bool, trimSuffix string) {
 	values := make([]Value, 0, 100)
 	for _, file := range g.pkg.files {
 		// Set the state for this run of the walker.
@@ -332,7 +333,7 @@ func (g *Generator) generate(typeName string, includeJSON, includeYAML, includeS
 		log.Fatalf("no values defined for type %s", typeName)
 	}
 
-	g.trimValueNames(values, trimPrefix)
+	g.trimValueNames(values, trimPrefix, trimSuffix)
 
 	if autoTrimPrefix {
 		g.autoTrimValueNames(values)

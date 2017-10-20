@@ -35,13 +35,15 @@ func autoPrefix(values []Value) string {
 	return prefix
 }
 
-func (g *Generator) trimValueNames(values []Value, prefix string) {
+func (g *Generator) trimValueNames(values []Value, prefix string, suffix string) {
 	for i := range values {
 		values[i].name = strings.TrimPrefix(values[i].name, prefix)
+		values[i].name = strings.TrimSuffix(values[i].name, suffix)
 	}
 }
 
 func (g *Generator) autoTrimValueNames(values []Value) {
 	prefix := autoPrefix(values)
-	g.trimValueNames(values, prefix)
+	suffix := "" // FIXME: AutoSuffix
+	g.trimValueNames(values, prefix, suffix)
 }
