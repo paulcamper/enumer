@@ -37,8 +37,15 @@ func autoPrefix(values []Value) string {
 
 func (g *Generator) trimValueNames(values []Value, prefix string, suffix string) {
 	for i := range values {
-		values[i].name = strings.TrimPrefix(values[i].name, prefix)
-		values[i].name = strings.TrimSuffix(values[i].name, suffix)
+		// Fix: Allow multiple prefixes when generating multiple types in single target file
+		for _, p := range strings.Split(prefix, ",") {
+			values[i].name = strings.TrimPrefix(values[i].name, p)
+		}
+
+		// Fix: Allow multiple suffixes when generating multiple types in single target file
+		for _, s := range strings.Split(suffix, ",") {
+			values[i].name = strings.TrimSuffix(values[i].name, s)
+		}
 	}
 }
 
