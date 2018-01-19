@@ -21,6 +21,12 @@ func transform(src, delim string) string {
 	return result
 }
 
+func toCamelCaseLower(src string) string {
+	f := firstLower(src)
+
+	return string(f + src[1:])
+}
+
 func toSnakeCase(src string) string {
 	return transform(src, "_")
 }

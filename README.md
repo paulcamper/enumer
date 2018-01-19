@@ -101,6 +101,7 @@ name := MyTypeValue.String() // name => "my_type_value"
 
 ### Transformers
 - CamelCase
+- CamelCase_lower
 - snake_case
 - snake_lower
 - snake_upper

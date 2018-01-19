@@ -309,6 +309,8 @@ func (g *Generator) transformValueNames(values []Value, transformMethod string) 
 		transform = firstUpper
 	case "first_lower":
 		transform = firstLower
+	case "camelcase_lower", "CamelCase_lower":
+		transform = toCamelCaseLower
 	default:
 		return
 	}
