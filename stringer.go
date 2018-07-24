@@ -80,6 +80,7 @@ import (
 var (
 	typeNames       = flag.String("type", "", "comma-separated list of type names; must be set")
 	sql             = flag.Bool("sql", false, "if true, the Scanner and Valuer interface will be implemented.")
+	nullValue       = flag.String("nullvalue", "", "this value will be converted to nil sql/driver.Value. Default: \"\"")
 	json            = flag.Bool("json", false, "if true, json marshaling methods will be generated. Default: false")
 	yaml            = flag.Bool("yaml", false, "if true, yaml marshaling methods will be generated. Default: false")
 	output          = flag.String("output", "", "output file name; default srcdir/<type>_string.go")
@@ -151,7 +152,7 @@ func main() {
 
 	// Run generate for each type.
 	for _, typeName := range types {
-		g.generate(typeName, *json, *yaml, *sql, *transformMethod, *trimPrefix, *autoTrimPrefix, *trimSuffix)
+		g.generate(typeName, *json, *yaml, *sql, *nullValue, *transformMethod, *trimPrefix, *autoTrimPrefix, *trimSuffix)
 	}
 
 	// Format the output.
@@ -321,7 +322,7 @@ func (g *Generator) transformValueNames(values []Value, transformMethod string) 
 }
 
 // generate produces the String method for the named type.
-func (g *Generator) generate(typeName string, includeJSON, includeYAML, includeSQL bool, transformMethod string, trimPrefix string, autoTrimPrefix bool, trimSuffix string) {
+func (g *Generator) generate(typeName string, includeJSON, includeYAML, includeSQL bool, nullValue, transformMethod string, trimPrefix string, autoTrimPrefix bool, trimSuffix string) {
 	values := make([]Value, 0, 100)
 	for _, file := range g.pkg.files {
 		// Set the state for this run of the walker.
@@ -376,7 +377,7 @@ func (g *Generator) generate(typeName string, includeJSON, includeYAML, includeS
 		g.buildYAMLMethods(runs, typeName, runsThreshold)
 	}
 	if includeSQL {
-		g.addSQLMethods(typeName)
+		g.addSQLMethods(typeName, nullValue)
 	}
 }
 

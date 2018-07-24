@@ -7,6 +7,17 @@ const sqlValueMethod = `func (i %[1]s) Value() (driver.Value, error) {
 }
 `
 
+// Arguments to format are:
+//  [1]: type name
+//  [2]: null value
+const sqlValueMethodWithNull = `func (i %[1]s) Value() (driver.Value, error) {
+	if i == %[2]s {
+		return nil, nil
+	}
+	return i.String(), nil
+}
+`
+
 const sqlScanMethod = `func (i *%[1]s) Scan(value interface{}) error {
 	if value == nil {
 		return nil
@@ -43,9 +54,13 @@ const sqlListMethod = `func %[1]sSqlEnumString() string {
 }
 `
 
-func (g *Generator) addSQLMethods(typeName string) {
+func (g *Generator) addSQLMethods(typeName string, nullValue string) {
 	g.Printf("\n")
-	g.Printf(sqlValueMethod, typeName)
+	if nullValue != "" {
+		g.Printf(sqlValueMethodWithNull, typeName, nullValue)
+	} else {
+		g.Printf(sqlValueMethod, typeName)
+	}
 	g.Printf("\n\n")
 	g.Printf(sqlScanMethod, typeName)
 	g.Printf("\n\n")
