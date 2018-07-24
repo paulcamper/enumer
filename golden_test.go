@@ -31,19 +31,19 @@ var golden = []Golden{
 }
 
 var goldenJSON = []Golden{
-	{"prime", prime_json_in, prime_json_out},
+	{"prime_json", prime_json_in, prime_json_out},
 }
 
 var goldenYAML = []Golden{
-	{"prime", prime_yaml_in, prime_yaml_out},
+	{"prime_yaml", prime_yaml_in, prime_yaml_out},
 }
 
 var goldenSQL = []Golden{
-	{"prime", prime_sql_in, prime_sql_out},
+	{"prime_sql", prime_sql_in, prime_sql_out},
 }
 
 var goldenJSONAndSQL = []Golden{
-	{"prime", prime_json_and_sql_in, prime_json_and_sql_out},
+	{"prime_json_and_sql", prime_json_and_sql_in, prime_json_and_sql_out},
 }
 
 // Each example starts with "type XXX [u]int", with a single space separating them.
@@ -89,6 +89,35 @@ func DayString(s string) (Day, error) {
 	}
 	return 0, fmt.Errorf("%s does not belong to Day values", s)
 }
+
+func DayList() []Day {
+	list := make([]Day, len(_DayNameToValue_map))
+	idx := 0
+	for _, v := range _DayNameToValue_map {
+		list[idx] = v
+		idx++
+	}
+	return list
+}
+
+func DayListString() []string {
+	list := make([]string, len(_DayNameToValue_map))
+	idx := 0
+	for k := range _DayNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return list
+}
+
+func DayIsValid(t Day) bool {
+	for _, v := range DayList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
+}
 `
 
 // Enumeration with an offset.
@@ -127,6 +156,35 @@ func NumberString(s string) (Number, error) {
 		return val, nil
 	}
 	return 0, fmt.Errorf("%s does not belong to Number values", s)
+}
+
+func NumberList() []Number {
+	list := make([]Number, len(_NumberNameToValue_map))
+	idx := 0
+	for _, v := range _NumberNameToValue_map {
+		list[idx] = v
+		idx++
+	}
+	return list
+}
+
+func NumberListString() []string {
+	list := make([]string, len(_NumberNameToValue_map))
+	idx := 0
+	for k := range _NumberNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return list
+}
+
+func NumberIsValid(t Number) bool {
+	for _, v := range NumberList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
 }
 `
 
@@ -189,6 +247,35 @@ func GapString(s string) (Gap, error) {
 	}
 	return 0, fmt.Errorf("%s does not belong to Gap values", s)
 }
+
+func GapList() []Gap {
+	list := make([]Gap, len(_GapNameToValue_map))
+	idx := 0
+	for _, v := range _GapNameToValue_map {
+		list[idx] = v
+		idx++
+	}
+	return list
+}
+
+func GapListString() []string {
+	list := make([]string, len(_GapNameToValue_map))
+	idx := 0
+	for k := range _GapNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return list
+}
+
+func GapIsValid(t Gap) bool {
+	for _, v := range GapList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
+}
 `
 
 // Signed integers spanning zero.
@@ -228,6 +315,35 @@ func NumString(s string) (Num, error) {
 		return val, nil
 	}
 	return 0, fmt.Errorf("%s does not belong to Num values", s)
+}
+
+func NumList() []Num {
+	list := make([]Num, len(_NumNameToValue_map))
+	idx := 0
+	for _, v := range _NumNameToValue_map {
+		list[idx] = v
+		idx++
+	}
+	return list
+}
+
+func NumListString() []string {
+	list := make([]string, len(_NumNameToValue_map))
+	idx := 0
+	for k := range _NumNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return list
+}
+
+func NumIsValid(t Num) bool {
+	for _, v := range NumList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
 }
 `
 
@@ -281,6 +397,35 @@ func UnumString(s string) (Unum, error) {
 		return val, nil
 	}
 	return 0, fmt.Errorf("%s does not belong to Unum values", s)
+}
+
+func UnumList() []Unum {
+	list := make([]Unum, len(_UnumNameToValue_map))
+	idx := 0
+	for _, v := range _UnumNameToValue_map {
+		list[idx] = v
+		idx++
+	}
+	return list
+}
+
+func UnumListString() []string {
+	list := make([]string, len(_UnumNameToValue_map))
+	idx := 0
+	for k := range _UnumNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return list
+}
+
+func UnumIsValid(t Unum) bool {
+	for _, v := range UnumList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
 }
 `
 
@@ -353,6 +498,35 @@ func PrimeString(s string) (Prime, error) {
 	}
 	return 0, fmt.Errorf("%s does not belong to Prime values", s)
 }
+
+func PrimeList() []Prime {
+	list := make([]Prime, len(_PrimeNameToValue_map))
+	idx := 0
+	for _, v := range _PrimeNameToValue_map {
+		list[idx] = v
+		idx++
+	}
+	return list
+}
+
+func PrimeListString() []string {
+	list := make([]string, len(_PrimeNameToValue_map))
+	idx := 0
+	for k := range _PrimeNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return list
+}
+
+func PrimeIsValid(t Prime) bool {
+	for _, v := range PrimeList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
+}
 `
 const prime_json_in = `type Prime int
 const (
@@ -420,6 +594,35 @@ func PrimeString(s string) (Prime, error) {
 		return val, nil
 	}
 	return 0, fmt.Errorf("%s does not belong to Prime values", s)
+}
+
+func PrimeList() []Prime {
+	list := make([]Prime, len(_PrimeNameToValue_map))
+	idx := 0
+	for _, v := range _PrimeNameToValue_map {
+		list[idx] = v
+		idx++
+	}
+	return list
+}
+
+func PrimeListString() []string {
+	list := make([]string, len(_PrimeNameToValue_map))
+	idx := 0
+	for k := range _PrimeNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return list
+}
+
+func PrimeIsValid(t Prime) bool {
+	for _, v := range PrimeList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
 }
 
 func (i Prime) MarshalJSON() ([]byte, error) {
@@ -506,6 +709,35 @@ func PrimeString(s string) (Prime, error) {
 	return 0, fmt.Errorf("%s does not belong to Prime values", s)
 }
 
+func PrimeList() []Prime {
+	list := make([]Prime, len(_PrimeNameToValue_map))
+	idx := 0
+	for _, v := range _PrimeNameToValue_map {
+		list[idx] = v
+		idx++
+	}
+	return list
+}
+
+func PrimeListString() []string {
+	list := make([]string, len(_PrimeNameToValue_map))
+	idx := 0
+	for k := range _PrimeNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return list
+}
+
+func PrimeIsValid(t Prime) bool {
+	for _, v := range PrimeList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
+}
+
 func (i Prime) MarshalYAML() (interface{}, error) {
 	return i.String(), nil
 }
@@ -590,6 +822,35 @@ func PrimeString(s string) (Prime, error) {
 	return 0, fmt.Errorf("%s does not belong to Prime values", s)
 }
 
+func PrimeList() []Prime {
+	list := make([]Prime, len(_PrimeNameToValue_map))
+	idx := 0
+	for _, v := range _PrimeNameToValue_map {
+		list[idx] = v
+		idx++
+	}
+	return list
+}
+
+func PrimeListString() []string {
+	list := make([]string, len(_PrimeNameToValue_map))
+	idx := 0
+	for k := range _PrimeNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return list
+}
+
+func PrimeIsValid(t Prime) bool {
+	for _, v := range PrimeList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
+}
+
 func (i Prime) Value() (driver.Value, error) {
 	return i.String(), nil
 }
@@ -616,6 +877,16 @@ func (i *Prime) Scan(value interface{}) error {
 
 	*i = val
 	return nil
+}
+
+func PrimeSqlEnumString() string {
+	list := make([]string, len(_PrimeNameToValue_map))
+	idx := 0
+	for k := range _PrimeNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return strings.Join(list, ",")
 }
 `
 
@@ -687,6 +958,35 @@ func PrimeString(s string) (Prime, error) {
 	return 0, fmt.Errorf("%s does not belong to Prime values", s)
 }
 
+func PrimeList() []Prime {
+	list := make([]Prime, len(_PrimeNameToValue_map))
+	idx := 0
+	for _, v := range _PrimeNameToValue_map {
+		list[idx] = v
+		idx++
+	}
+	return list
+}
+
+func PrimeListString() []string {
+	list := make([]string, len(_PrimeNameToValue_map))
+	idx := 0
+	for k := range _PrimeNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return list
+}
+
+func PrimeIsValid(t Prime) bool {
+	for _, v := range PrimeList() {
+		if t == v {
+			return true
+		}
+	}
+	return false
+}
+
 func (i Prime) MarshalJSON() ([]byte, error) {
 	return json.Marshal(i.String())
 }
@@ -729,6 +1029,16 @@ func (i *Prime) Scan(value interface{}) error {
 	*i = val
 	return nil
 }
+
+func PrimeSqlEnumString() string {
+	list := make([]string, len(_PrimeNameToValue_map))
+	idx := 0
+	for k := range _PrimeNameToValue_map {
+		list[idx] = k
+		idx++
+	}
+	return strings.Join(list, ",")
+}
 `
 
 func TestGolden(t *testing.T) {
@@ -759,7 +1069,7 @@ func runGoldenTest(t *testing.T, test Golden, generateJSON, generateYAML, genera
 	if len(tokens) != 3 {
 		t.Fatalf("%s: need type declaration on first line", test.name)
 	}
-	g.generate(tokens[1], generateJSON, generateYAML, generateSQL, "noop", "", false)
+	g.generate(tokens[1], generateJSON, generateYAML, generateSQL, "noop", "", false, "")
 	got := string(g.format())
 	if got != test.output {
 		t.Errorf("%s: got\n====\n%s====\nexpected\n====%s", test.name, got, test.output)
